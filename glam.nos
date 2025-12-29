@@ -1,0 +1,223 @@
+# Glam - Linear Algebra Library for Nostos
+#
+# This module provides vector, matrix, and quaternion operations
+# using the native glam extension.
+#
+# Usage:
+#   import glam
+#
+#   v1 = glam.vec3(1.0, 2.0, 3.0)
+#   v2 = glam.vec3(4.0, 5.0, 6.0)
+#   sum = glam.vec3Add(v1, v2)
+
+# =============================================================================
+# Vec2 - 2D Vector Operations
+# =============================================================================
+
+# Create a 2D vector
+vec2(x: Float, y: Float) = __native__("Glam.vec2", x, y)
+
+# Add two Vec2s
+vec2Add(a: (Float, Float), b: (Float, Float)) = __native__("Glam.vec2Add", a, b)
+
+# Subtract two Vec2s
+vec2Sub(a: (Float, Float), b: (Float, Float)) = __native__("Glam.vec2Sub", a, b)
+
+# Multiply Vec2 by scalar
+vec2Mul(v: (Float, Float), s: Float) = __native__("Glam.vec2Mul", v, s)
+
+# Dot product of two Vec2s
+vec2Dot(a: (Float, Float), b: (Float, Float)) = __native__("Glam.vec2Dot", a, b)
+
+# Length of Vec2
+vec2Length(v: (Float, Float)) = __native__("Glam.vec2Length", v)
+
+# Normalize Vec2 to unit length
+vec2Normalize(v: (Float, Float)) = __native__("Glam.vec2Normalize", v)
+
+# =============================================================================
+# Vec3 - 3D Vector Operations
+# =============================================================================
+
+# Create a 3D vector
+vec3(x: Float, y: Float, z: Float) = __native__("Glam.vec3", x, y, z)
+
+# Add two Vec3s
+vec3Add(a: (Float, Float, Float), b: (Float, Float, Float)) = __native__("Glam.vec3Add", a, b)
+
+# Subtract two Vec3s
+vec3Sub(a: (Float, Float, Float), b: (Float, Float, Float)) = __native__("Glam.vec3Sub", a, b)
+
+# Multiply Vec3 by scalar
+vec3Mul(v: (Float, Float, Float), s: Float) = __native__("Glam.vec3Mul", v, s)
+
+# Dot product of two Vec3s
+vec3Dot(a: (Float, Float, Float), b: (Float, Float, Float)) = __native__("Glam.vec3Dot", a, b)
+
+# Cross product of two Vec3s
+vec3Cross(a: (Float, Float, Float), b: (Float, Float, Float)) = __native__("Glam.vec3Cross", a, b)
+
+# Length of Vec3
+vec3Length(v: (Float, Float, Float)) = __native__("Glam.vec3Length", v)
+
+# Normalize Vec3 to unit length
+vec3Normalize(v: (Float, Float, Float)) = __native__("Glam.vec3Normalize", v)
+
+# =============================================================================
+# Vec4 - 4D Vector Operations (also used for homogeneous coordinates)
+# =============================================================================
+
+# Create a 4D vector
+vec4(x: Float, y: Float, z: Float, w: Float) = __native__("Glam.vec4", x, y, z, w)
+
+# Add two Vec4s
+vec4Add(a: (Float, Float, Float, Float), b: (Float, Float, Float, Float)) = __native__("Glam.vec4Add", a, b)
+
+# Dot product of two Vec4s
+vec4Dot(a: (Float, Float, Float, Float), b: (Float, Float, Float, Float)) = __native__("Glam.vec4Dot", a, b)
+
+# =============================================================================
+# Mat4 - 4x4 Matrix Operations
+# =============================================================================
+
+# Create identity matrix
+mat4Identity() = __native__("Glam.mat4Identity")
+
+# Create translation matrix
+mat4Translate(v: (Float, Float, Float)) = __native__("Glam.mat4Translate", v)
+
+# Create scale matrix
+mat4Scale(v: (Float, Float, Float)) = __native__("Glam.mat4Scale", v)
+
+# Create rotation matrix around X axis (angle in radians)
+mat4RotateX(angle: Float) = __native__("Glam.mat4RotateX", angle)
+
+# Create rotation matrix around Y axis (angle in radians)
+mat4RotateY(angle: Float) = __native__("Glam.mat4RotateY", angle)
+
+# Create rotation matrix around Z axis (angle in radians)
+mat4RotateZ(angle: Float) = __native__("Glam.mat4RotateZ", angle)
+
+# Multiply two Mat4s
+mat4Mul(a: List, b: List) = __native__("Glam.mat4Mul", a, b)
+
+# Multiply Mat4 by Vec4
+mat4MulVec4(m: List, v: (Float, Float, Float, Float)) = __native__("Glam.mat4MulVec4", m, v)
+
+# Create perspective projection matrix
+# fovY: field of view in Y direction (radians)
+# aspect: aspect ratio (width/height)
+# zNear: near clipping plane
+# zFar: far clipping plane
+mat4Perspective(fovY: Float, aspect: Float, zNear: Float, zFar: Float) =
+    __native__("Glam.mat4Perspective", fovY, aspect, zNear, zFar)
+
+# Create look-at view matrix
+# eye: camera position
+# center: point to look at
+# up: up vector
+mat4LookAt(eye: (Float, Float, Float), center: (Float, Float, Float), up: (Float, Float, Float)) =
+    __native__("Glam.mat4LookAt", eye, center, up)
+
+# =============================================================================
+# Quaternion Operations
+# =============================================================================
+
+# Create quaternion from axis and angle (angle in radians)
+quatFromAxisAngle(axis: (Float, Float, Float), angle: Float) =
+    __native__("Glam.quatFromAxisAngle", axis, angle)
+
+# Multiply two quaternions
+quatMul(a: (Float, Float, Float, Float), b: (Float, Float, Float, Float)) =
+    __native__("Glam.quatMul", a, b)
+
+# Rotate a Vec3 by a quaternion
+quatRotateVec3(q: (Float, Float, Float, Float), v: (Float, Float, Float)) =
+    __native__("Glam.quatRotateVec3", q, v)
+
+# =============================================================================
+# Constants
+# =============================================================================
+
+PI = 3.14159265358979323846
+TAU = 6.28318530717958647692  # 2 * PI
+
+# Convert degrees to radians
+toRadians(degrees: Float) = degrees * PI / 180.0
+
+# Convert radians to degrees
+toDegrees(radians: Float) = radians * 180.0 / PI
+
+# =============================================================================
+# Array/List Conversion Functions
+# =============================================================================
+
+# Convert a list [x, y] to Vec2
+listToVec2(l: List) = vec2(nth(l, 0), nth(l, 1))
+
+# Convert a list [x, y, z] to Vec3
+listToVec3(l: List) = vec3(nth(l, 0), nth(l, 1), nth(l, 2))
+
+# Convert a list [x, y, z, w] to Vec4
+listToVec4(l: List) = vec4(nth(l, 0), nth(l, 1), nth(l, 2), nth(l, 3))
+
+# Convert Vec2 tuple to list
+vec2ToList(v: (Float, Float)) = {
+    (x, y) = v
+    [x, y]
+}
+
+# Convert Vec3 tuple to list
+vec3ToList(v: (Float, Float, Float)) = {
+    (x, y, z) = v
+    [x, y, z]
+}
+
+# Convert Vec4 tuple to list
+vec4ToList(v: (Float, Float, Float, Float)) = {
+    (x, y, z, w) = v
+    [x, y, z, w]
+}
+
+# =============================================================================
+# Convenience Functions
+# =============================================================================
+
+# Create a Vec3 point (with w=1 for transformations)
+point3(x: Float, y: Float, z: Float) = vec4(x, y, z, 1.0)
+
+# Create a Vec3 direction (with w=0 for transformations)
+direction3(x: Float, y: Float, z: Float) = vec4(x, y, z, 0.0)
+
+# Transform a 3D point by a matrix (assumes w=1)
+transformPoint(m: List, p: (Float, Float, Float)) = {
+    (x, y, z) = p
+    result = mat4MulVec4(m, (x, y, z, 1.0))
+    (rx, ry, rz, _rw) = result
+    (rx, ry, rz)
+}
+
+# Transform a 3D direction by a matrix (assumes w=0, ignores translation)
+transformDirection(m: List, d: (Float, Float, Float)) = {
+    (x, y, z) = d
+    result = mat4MulVec4(m, (x, y, z, 0.0))
+    (rx, ry, rz, _rw) = result
+    (rx, ry, rz)
+}
+
+# Linear interpolation between two Vec3s
+vec3Lerp(a: (Float, Float, Float), b: (Float, Float, Float), t: Float) = {
+    (ax, ay, az) = a
+    (bx, by, bz) = b
+    (ax + (bx - ax) * t, ay + (by - ay) * t, az + (bz - az) * t)
+}
+
+# Distance between two Vec3 points
+vec3Distance(a: (Float, Float, Float), b: (Float, Float, Float)) =
+    vec3Length(vec3Sub(b, a))
+
+# Reflect vector v around normal n
+vec3Reflect(v: (Float, Float, Float), n: (Float, Float, Float)) = {
+    dot = vec3Dot(v, n)
+    vec3Sub(v, vec3Mul(n, 2.0 * dot))
+}
