@@ -9,46 +9,46 @@ use glam::{Vec2, Vec3, Vec4, Mat3, Mat4, Quat};
 declare_extension!("glam", "0.1.0", register);
 
 fn register(reg: &mut ExtRegistry) {
-    // Vec2 operations
-    reg.add("Glam.vec2", vec2_new);
-    reg.add("Glam.vec2Add", vec2_add);
-    reg.add("Glam.vec2Sub", vec2_sub);
-    reg.add("Glam.vec2Mul", vec2_mul);
-    reg.add("Glam.vec2Dot", vec2_dot);
-    reg.add("Glam.vec2Length", vec2_length);
-    reg.add("Glam.vec2Normalize", vec2_normalize);
+    // Vec2 operations - represented as (Float, Float) tuples
+    reg.add_fn("Glam.vec2", "(Float, Float) -> (Float, Float)", vec2_new);
+    reg.add_fn("Glam.vec2Add", "((Float, Float), (Float, Float)) -> (Float, Float)", vec2_add);
+    reg.add_fn("Glam.vec2Sub", "((Float, Float), (Float, Float)) -> (Float, Float)", vec2_sub);
+    reg.add_fn("Glam.vec2Mul", "((Float, Float), Float) -> (Float, Float)", vec2_mul);
+    reg.add_fn("Glam.vec2Dot", "((Float, Float), (Float, Float)) -> Float", vec2_dot);
+    reg.add_fn("Glam.vec2Length", "((Float, Float)) -> Float", vec2_length);
+    reg.add_fn("Glam.vec2Normalize", "((Float, Float)) -> (Float, Float)", vec2_normalize);
 
-    // Vec3 operations
-    reg.add("Glam.vec3", vec3_new);
-    reg.add("Glam.vec3Add", vec3_add);
-    reg.add("Glam.vec3Sub", vec3_sub);
-    reg.add("Glam.vec3Mul", vec3_mul);
-    reg.add("Glam.vec3Dot", vec3_dot);
-    reg.add("Glam.vec3Cross", vec3_cross);
-    reg.add("Glam.vec3Length", vec3_length);
-    reg.add("Glam.vec3Normalize", vec3_normalize);
+    // Vec3 operations - represented as (Float, Float, Float) tuples
+    reg.add_fn("Glam.vec3", "(Float, Float, Float) -> (Float, Float, Float)", vec3_new);
+    reg.add_fn("Glam.vec3Add", "((Float, Float, Float), (Float, Float, Float)) -> (Float, Float, Float)", vec3_add);
+    reg.add_fn("Glam.vec3Sub", "((Float, Float, Float), (Float, Float, Float)) -> (Float, Float, Float)", vec3_sub);
+    reg.add_fn("Glam.vec3Mul", "((Float, Float, Float), Float) -> (Float, Float, Float)", vec3_mul);
+    reg.add_fn("Glam.vec3Dot", "((Float, Float, Float), (Float, Float, Float)) -> Float", vec3_dot);
+    reg.add_fn("Glam.vec3Cross", "((Float, Float, Float), (Float, Float, Float)) -> (Float, Float, Float)", vec3_cross);
+    reg.add_fn("Glam.vec3Length", "((Float, Float, Float)) -> Float", vec3_length);
+    reg.add_fn("Glam.vec3Normalize", "((Float, Float, Float)) -> (Float, Float, Float)", vec3_normalize);
 
-    // Vec4 operations
-    reg.add("Glam.vec4", vec4_new);
-    reg.add("Glam.vec4Add", vec4_add);
-    reg.add("Glam.vec4Dot", vec4_dot);
+    // Vec4 operations - represented as (Float, Float, Float, Float) tuples
+    reg.add_fn("Glam.vec4", "(Float, Float, Float, Float) -> (Float, Float, Float, Float)", vec4_new);
+    reg.add_fn("Glam.vec4Add", "((Float, Float, Float, Float), (Float, Float, Float, Float)) -> (Float, Float, Float, Float)", vec4_add);
+    reg.add_fn("Glam.vec4Dot", "((Float, Float, Float, Float), (Float, Float, Float, Float)) -> Float", vec4_dot);
 
-    // Mat4 operations
-    reg.add("Glam.mat4Identity", mat4_identity);
-    reg.add("Glam.mat4Translate", mat4_translate);
-    reg.add("Glam.mat4Scale", mat4_scale);
-    reg.add("Glam.mat4RotateX", mat4_rotate_x);
-    reg.add("Glam.mat4RotateY", mat4_rotate_y);
-    reg.add("Glam.mat4RotateZ", mat4_rotate_z);
-    reg.add("Glam.mat4Mul", mat4_mul);
-    reg.add("Glam.mat4MulVec4", mat4_mul_vec4);
-    reg.add("Glam.mat4Perspective", mat4_perspective);
-    reg.add("Glam.mat4LookAt", mat4_look_at);
+    // Mat4 operations - represented as List[Float] (16 elements, column-major)
+    reg.add_fn("Glam.mat4Identity", "() -> List[Float]", mat4_identity);
+    reg.add_fn("Glam.mat4Translate", "((Float, Float, Float)) -> List[Float]", mat4_translate);
+    reg.add_fn("Glam.mat4Scale", "((Float, Float, Float)) -> List[Float]", mat4_scale);
+    reg.add_fn("Glam.mat4RotateX", "(Float) -> List[Float]", mat4_rotate_x);
+    reg.add_fn("Glam.mat4RotateY", "(Float) -> List[Float]", mat4_rotate_y);
+    reg.add_fn("Glam.mat4RotateZ", "(Float) -> List[Float]", mat4_rotate_z);
+    reg.add_fn("Glam.mat4Mul", "(List[Float], List[Float]) -> List[Float]", mat4_mul);
+    reg.add_fn("Glam.mat4MulVec4", "(List[Float], (Float, Float, Float, Float)) -> (Float, Float, Float, Float)", mat4_mul_vec4);
+    reg.add_fn("Glam.mat4Perspective", "(Float, Float, Float, Float) -> List[Float]", mat4_perspective);
+    reg.add_fn("Glam.mat4LookAt", "((Float, Float, Float), (Float, Float, Float), (Float, Float, Float)) -> List[Float]", mat4_look_at);
 
-    // Quaternion operations
-    reg.add("Glam.quatFromAxisAngle", quat_from_axis_angle);
-    reg.add("Glam.quatMul", quat_mul);
-    reg.add("Glam.quatRotateVec3", quat_rotate_vec3);
+    // Quaternion operations - represented as (Float, Float, Float, Float) tuples (x, y, z, w)
+    reg.add_fn("Glam.quatFromAxisAngle", "((Float, Float, Float), Float) -> (Float, Float, Float, Float)", quat_from_axis_angle);
+    reg.add_fn("Glam.quatMul", "((Float, Float, Float, Float), (Float, Float, Float, Float)) -> (Float, Float, Float, Float)", quat_mul);
+    reg.add_fn("Glam.quatRotateVec3", "((Float, Float, Float, Float), (Float, Float, Float)) -> (Float, Float, Float)", quat_rotate_vec3);
 }
 
 // Helper to convert Vec2 to Value (tuple of floats)
