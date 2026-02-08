@@ -4,7 +4,7 @@
 //! This is a test extension to validate the FFI architecture.
 
 use nostos_extension::*;
-use glam::{Vec2, Vec3, Vec4, Mat3, Mat4, Quat};
+use glam::{Vec2, Vec3, Vec4, Mat4, Quat};
 
 declare_extension!("glam", "0.1.0", register);
 
